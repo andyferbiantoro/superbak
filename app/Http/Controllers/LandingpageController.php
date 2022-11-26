@@ -26,8 +26,9 @@ class LandingpageController extends Controller
 
 		$detail_jasa = Jasa::where('id',$id)->get();
 		$nama_jasa = Jasa::where('id', $id)->first();
+		$kontak = Kontak::orderBy('id', 'DESC')->first();
 
-		return view('landingpage.jasa.detail_jasa', compact('detail_jasa','nama_jasa'));
+		return view('landingpage.jasa.detail_jasa', compact('detail_jasa','nama_jasa','kontak'));
 	}
 
 }
