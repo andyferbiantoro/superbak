@@ -18,27 +18,7 @@ BAK INDONESIA ADMIN
     <div class="card-body">
      
       
-      @if (session('success'))
-      <div class="alert alert-success">
-        {{ session('success') }}
-      </div>
-      @endif
-      <div class="table-responsive">
-        <table id="dataTable" class="table table-striped" style="width:100%">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama Pelaku Usaha</th>
-              <th>Nama Produk</th>
-              <th>Jenis Usaha</th>
-              <th>Foto Produk</th>
-              <th>Opsi</th>
-              <th style="display: none;">hidden</th>
-            </tr>
-          </thead>
-          
-    </table>
-  </div>
+    
 
 
 </div>

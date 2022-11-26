@@ -20,8 +20,13 @@ use App\Http\Controllers\LandingpageController;
 //     return view('welcome');
 // });
 
-
+//landingpage
 Route::get('/', [LandingpageController::class, 'landingpage'])->name('landingpage');
+Route::get('/detail_jasa{id}', [LandingpageController::class, 'detail_jasa'])->name('detail_jasa');
+
+// Route::get('/jasa', [LandingpageController::class, 'jasa'])->name('jasa');
+
+
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
@@ -36,7 +41,40 @@ Route::post('/proses_login', [AuthController::class, 'proses_login'])->name('pro
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
-   Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
-   
-   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+	Route::get('/admin', [AdminController::class, 'index'])->name('index');
+
+	Route::get('/jasa', [AdminController::class, 'jasa'])->name('jasa');
+	Route::post('/jasa_add', [AdminController::class, 'jasa_add'])->name('jasa_add');
+	Route::get('/jasa_edit{id}', [AdminController::class, 'jasa_edit'])->name('jasa_edit');
+	Route::post('/jasa_update/{id}', [AdminController::class, 'jasa_update'])->name('jasa_update');
+	Route::post('/jasa_delete/{id}', [AdminController::class, 'jasa_delete'])->name('jasa_delete');
+
+
+	Route::post('/foto_jasa_update/{id}', [AdminController::class, 'foto_jasa_update'])->name('foto_jasa_update');
+	Route::post('/foto_jasa_delete_1/{id}', [AdminController::class, 'foto_jasa_delete_1'])->name('foto_jasa_delete_1');
+	Route::post('/foto_jasa_delete_2/{id}', [AdminController::class, 'foto_jasa_delete_2'])->name('foto_jasa_delete_2');
+	Route::post('/foto_jasa_delete_3/{id}', [AdminController::class, 'foto_jasa_delete_3'])->name('foto_jasa_delete_3');
+	Route::post('/foto_jasa_delete_4/{id}', [AdminController::class, 'foto_jasa_delete_4'])->name('foto_jasa_delete_4');
+	Route::post('/foto_jasa_delete_5/{id}', [AdminController::class, 'foto_jasa_delete_5'])->name('foto_jasa_delete_5');
+
+
+	Route::get('/visi_misi', [AdminController::class, 'visi_misi'])->name('visi_misi');
+	Route::post('/visi_misi_add', [AdminController::class, 'visi_misi_add'])->name('visi_misi_add');
+	Route::post('/visi_misi_update/{id}', [AdminController::class, 'visi_misi_update'])->name('visi_misi_update');
+	Route::post('/visi_misi_delete/{id}', [AdminController::class, 'visi_misi_delete'])->name('visi_misi_delete');
+
+	Route::get('/kontak', [AdminController::class, 'kontak'])->name('kontak');
+	Route::post('/kontak_add', [AdminController::class, 'kontak_add'])->name('kontak_add');
+	Route::post('/kontak_update/{id}', [AdminController::class, 'kontak_update'])->name('kontak_update');
+	Route::post('/kontak_delete/{id}', [AdminController::class, 'kontak_delete'])->name('kontak_delete');
+
+	Route::get('/carousel', [AdminController::class, 'carousel'])->name('carousel');
+	Route::post('/carousel_add', [AdminController::class, 'carousel_add'])->name('carousel_add');
+	Route::post('/carousel_update/{id}', [AdminController::class, 'carousel_update'])->name('carousel_update');
+	Route::post('/carousel_delete/{id}', [AdminController::class, 'carousel_delete'])->name('carousel_delete');
+
+	// Route::post('/detail_jasa_add', [AdminController::class, 'detail_jasa_add'])->name('detail_jasa_add');
+
+
+	Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

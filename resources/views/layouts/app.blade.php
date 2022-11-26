@@ -30,8 +30,7 @@
 <body >
     <div id="app">
         <div class="main-wrapper">
-            <div class="navbar-bg" style="background: #141b44
-"></div>
+            <div class="navbar-bg" style="background: #1C75BC" ></div>
             <nav class="navbar navbar-expand-lg main-navbar">
                 @include('partials.topnav')
             </nav>
@@ -75,7 +74,15 @@
 
     </script>
 
-      <script type="text/javascript">
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable2').DataTable();
+        });
+
+    </script>
+
+  <script type="text/javascript">
                 $(document).ready(function() {
                    
                     var table = $('#dataTable').DataTable();
@@ -88,7 +95,7 @@
             // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
 
-            table.on('click', '#myImg', function (){
+            table.on('click', '#ImageTampil', function (){
 
                 $tr = $(this).closest('tr');
                 if ($($tr).hasClass('child')) {
@@ -107,9 +114,6 @@
 
         });
     </script>
-
-
-
 
 
     @yield('scripts')

@@ -23,7 +23,7 @@ class AuthController extends Controller
             //auth->user() untuk memanggil data user yang sudah login
         	
         	if(auth()->user()->role == "admin"){
-        		return redirect()->route('admin')->with('success', 'Anda Berhasil Login');
+        		return redirect()->route('index')->with('success', 'Anda Berhasil Login');
         	}
         }else {
             return redirect()->back()->with('error', 'Email / Password anda salah'); //route itu isinya name dari route di web.php

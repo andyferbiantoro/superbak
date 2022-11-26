@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Nov 2022 pada 13.13
+-- Waktu pembuatan: 26 Nov 2022 pada 05.21
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.0.23
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `bak_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `carousels`
+--
+
+CREATE TABLE `carousels` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `indeks` int(11) NOT NULL,
+  `image` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `carousels`
+--
+
+INSERT INTO `carousels` (`id`, `indeks`, `image`, `created_at`, `updated_at`) VALUES
+(1, 1, 'company.jpg', '2022-11-25 19:46:39', '2022-11-25 19:46:39'),
+(2, 2, 'business.jpg', '2022-11-25 19:46:46', '2022-11-25 19:46:46'),
+(4, 3, 'website2.jpg', '2022-11-25 20:26:38', '2022-11-25 20:26:38');
 
 -- --------------------------------------------------------
 
@@ -46,9 +69,45 @@ CREATE TABLE `failed_jobs` (
 CREATE TABLE `jasas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nama_jasa` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto_jasa_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto_jasa_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto_jasa_3` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto_jasa_4` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `foto_jasa_5` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deskripsi` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `jasas`
+--
+
+INSERT INTO `jasas` (`id`, `nama_jasa`, `foto_jasa_1`, `foto_jasa_2`, `foto_jasa_3`, `foto_jasa_4`, `foto_jasa_5`, `deskripsi`, `created_at`, `updated_at`) VALUES
+(1, 'Website & Mobile Apps', 'website.jpg', 'website2.jpg', 'website3.jpg', NULL, NULL, 'kami akan membantu segala permasalahan anda terkain dengan pembuatan Apliaksi dan Website', '2022-11-24 19:39:02', '2022-11-24 19:39:02'),
+(2, 'Desain', 'poster.jpg', 'poster3.jpg', 'poster3.jpg', NULL, NULL, 'kami akan memberikan pelayanan desain terbaik untuk anda', '2022-11-24 19:42:14', '2022-11-25 01:44:17');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kontaks`
+--
+
+CREATE TABLE `kontaks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_telp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `kontaks`
+--
+
+INSERT INTO `kontaks` (`id`, `alamat`, `no_telp`, `email`, `created_at`, `updated_at`) VALUES
+(2, 'Jl. Kepiting No. 30 Banyuwangi', '085245677312', 'superbak@gmail.com', '2022-11-25 16:56:29', '2022-11-25 16:56:29');
 
 -- --------------------------------------------------------
 
@@ -71,7 +130,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2022_11_22_084237_create_jasas_table', 1);
+(5, '2022_11_22_084237_create_jasas_table', 1),
+(6, '2022_11_25_020641_create_carousels_table', 1),
+(7, '2022_11_25_102927_create_visi_misis_table', 2),
+(8, '2022_11_25_120309_create_kontaks_table', 3);
 
 -- --------------------------------------------------------
 
@@ -127,11 +189,39 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$58hH7Fqh3joCftwWTVJMcusOJqK6Ir7mLbN65CAgHfP8lfggIHN6G', 'admin', NULL, '2022-11-22 02:25:51', '2022-11-22 02:25:51');
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$vfCQ.kohkXynzaw1NifAHeJxQg.gCh/A9wzEGM2Ghxsw/aJW7Ui5y', 'admin', NULL, '2022-11-24 19:25:53', '2022-11-24 19:25:53');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `visi_misis`
+--
+
+CREATE TABLE `visi_misis` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `visi` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `misi` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `visi_misis`
+--
+
+INSERT INTO `visi_misis` (`id`, `visi`, `misi`, `created_at`, `updated_at`) VALUES
+(3, 'visi 1', NULL, '2022-11-25 04:28:37', '2022-11-25 04:28:37'),
+(4, NULL, 'misi 1', '2022-11-25 04:28:48', '2022-11-25 04:28:48');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `carousels`
+--
+ALTER TABLE `carousels`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `failed_jobs`
@@ -144,6 +234,12 @@ ALTER TABLE `failed_jobs`
 -- Indeks untuk tabel `jasas`
 --
 ALTER TABLE `jasas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `kontaks`
+--
+ALTER TABLE `kontaks`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -174,8 +270,20 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indeks untuk tabel `visi_misis`
+--
+ALTER TABLE `visi_misis`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `carousels`
+--
+ALTER TABLE `carousels`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -187,13 +295,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `jasas`
 --
 ALTER TABLE `jasas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `kontaks`
+--
+ALTER TABLE `kontaks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -206,6 +320,12 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `visi_misis`
+--
+ALTER TABLE `visi_misis`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
