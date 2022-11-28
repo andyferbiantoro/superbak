@@ -11,15 +11,16 @@ BAK INDONESIA ADMIN
  <div class="col-lg-12">
   <div class="card">
     <div class="card-header">
-      <h4 style="color: #1C75BC">Informasi Perusahaan / Carousel</h4><br>
+      <h4 style="color: #1C75BC">Informasi Perusahaan / Beranda</h4><br>
     </div>
 
 
     <div class="card-body">
-     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalTambahKontak">
-      Tambah Image
+      @if($count == null)
+     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalTambahBeranda">
+      Tambah Data
     </button><br><hr>
-
+    @endif
     @if (session('success'))
     <div class="alert alert-success">
       {{ session('success') }}
@@ -30,21 +31,21 @@ BAK INDONESIA ADMIN
         <thead>
           <tr>
             <th>No</th>
-            <th>Indeks</th>
-            <th>Image</th>
+            <th>Header</th>
+            <th>Deskripsi</th>
             <th>Opsi</th>
             <th style="display: none;">hidden</th>
           </tr>
         </thead>
         <tbody>
           @php $no=1 @endphp
-          @foreach($carousel as $data)
+          @foreach($beranda as $data)
           <tr>
             <td>{{$no++}}</td>
-            <td>{{$data->indeks}}</td>
-            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/carousel/'.$data->image)}}"  data-toggle="modal" data-target="#myModal"></img></td>
+            <td>{{$data->header}}</td>
+            <td>{{$data->deskripsi}}</td>
             <td>
-               <button class="btn btn-success btn-sm editCarousel">Edit</button>
+               <button class="btn btn-success btn-sm editBeranda">Edit</button>
 
                <a href="#" data-toggle="modal" onclick="deleteData({{$data->id}})" data-target="#DeleteModal">
               <button class="btn btn-danger btn-sm"  title="Hapus">Hapus</button>
@@ -67,23 +68,28 @@ BAK INDONESIA ADMIN
 
 
 <!-- Modal Tambah -->
-<div class="modal fade" id="ModalTambahKontak" tabindex="-1" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalTambahBeranda" tabindex="-1" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myLargeModalLabel">Tambah Data Carousel</h5>
+        <h5 class="modal-title" id="myLargeModalLabel">Tambah Data</h5>
       </div>
       <div class="modal-body">
-       <form method="post" action="{{route('carousel_add')}}" enctype="multipart/form-data">
+       <form method="post" action="{{route('beranda_add')}}" enctype="multipart/form-data">
 
         {{csrf_field()}}
 
+       
         <div class="form-group">
-          <label for="image">Image</label>
-          <input type="file" class="form-control" id="image" name="image"  required=""></input>
+          <label for="header">Header</label>
+          <input type="text" class="form-control" id="header" name="header"  required=""></input>
         </div>
 
-        
+        <div class="form-group">
+          <label for="deskripsi">Deskripsi</label>
+          <input type="text" class="form-control" id="deskripsi" name="deskripsi"  required=""></input>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" type="Submit">Tambahkan</button>
@@ -103,13 +109,13 @@ BAK INDONESIA ADMIN
 
 
 <!-- Modal Update -->
-<div id="updateCarousel" class="modal fade" role="dialog">
+<div id="updateBeranda" class="modal fade" role="dialog">
   <div class="modal-dialog">
    <!--Modal content-->
-   <form action="" id="updateCarouselform" method="post" enctype="multipart/form-data">
+   <form action="" id="updateBerandaform" method="post" enctype="multipart/form-data">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Anda yakin ingin memperbarui Data Carousel ini ?</h5>
+        <h5 class="modal-title">Anda yakin ingin memperbarui Data Beranda ini ?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -118,9 +124,16 @@ BAK INDONESIA ADMIN
         {{ csrf_field() }}
         {{ method_field('POST') }}
 
-       <div class="form-group">
-          <label for="image">Image</label>
-          <input type="file" class="form-control" id="image_update" name="image"  required=""></input>
+        
+
+        <div class="form-group">
+          <label for="header">Header</label>
+          <input type="text" class="form-control" id="header_update" name="header"  required=""></input>
+        </div>
+
+        <div class="form-group">
+          <label for="deskripsi">Deskripsi</label>
+          <input type="text" class="form-control" id="deskripsi-update" name="deskripsi"  required=""></input>
         </div>
 
       </div> 
@@ -168,19 +181,7 @@ BAK INDONESIA ADMIN
 </div> 
 
 
-<!-- Creates the bootstrap modal where the image will appear -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        </div>
-        <div class="modal-body text-center">
-          <img src="" id="img01" style="width: 450px; height: auto;" >
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 
 @endsection
@@ -189,7 +190,7 @@ BAK INDONESIA ADMIN
 <script type="text/javascript">
   function deleteData(id) {
     var id = id;
-    var url = '{{route("carousel_delete", ":id") }}';
+    var url = '{{route("beranda_delete", ":id") }}';
     url = url.replace(':id', id);
     $("#deleteForm").attr('action', url);
   }
@@ -202,15 +203,18 @@ BAK INDONESIA ADMIN
 <script>
   $(document).ready(function() {
     var table = $('#dataTable').DataTable();
-    table.on('click', '.editCarousel', function() {
+    table.on('click', '.editBeranda', function() {
       $tr = $(this).closest('tr');
       if ($($tr).hasClass('child')) {
         $tr = $tr.prev('.parent');
       }
       var data = table.row($tr).data();
       console.log(data);
-      $('#updateCarouselform').attr('action','carousel_update/'+ data[4]);
-      $('#updateCarousel').modal('show');
+      $('#jumlah_Beranda_update').val(data[1]);
+      $('#penilaian_update').val(data[2]);
+      $('#jumlah_mitra_update').val(data[3]);
+      $('#updateBerandaform').attr('action','beranda_update/'+ data[5]);
+      $('#updateBeranda').modal('show');
     });
   });
 </script>

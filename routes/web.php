@@ -73,6 +73,33 @@ Route::middleware(['auth', 'admin'])->group(function () {
 	Route::post('/carousel_update/{id}', [AdminController::class, 'carousel_update'])->name('carousel_update');
 	Route::post('/carousel_delete/{id}', [AdminController::class, 'carousel_delete'])->name('carousel_delete');
 
+
+	Route::get('/kerjasama', [AdminController::class, 'kerjasama'])->name('kerjasama');
+	Route::post('/kerjasama_add', [AdminController::class, 'kerjasama_add'])->name('kerjasama_add');
+	Route::post('/kerjasama_update/{id}', [AdminController::class, 'kerjasama_update'])->name('kerjasama_update');
+	Route::post('/kerjasama_delete/{id}', [AdminController::class, 'kerjasama_delete'])->name('kerjasama_delete');
+
+
+	Route::get('/portofolio', [AdminController::class, 'portofolio'])->name('portofolio');
+	Route::post('/portofolio_add', [AdminController::class, 'portofolio_add'])->name('portofolio_add');
+	Route::post('/portofolio_update/{id}', [AdminController::class, 'portofolio_update'])->name('portofolio_update');
+	Route::post('/portofolio_delete/{id}', [AdminController::class, 'portofolio_delete'])->name('portofolio_delete');
+
+	Route::get('/team', [AdminController::class, 'team'])->name('team');
+	Route::post('/team_add', [AdminController::class, 'team_add'])->name('team_add');
+	Route::post('/team_update/{id}', [AdminController::class, 'team_update'])->name('team_update');
+	Route::post('/team_delete/{id}', [AdminController::class, 'team_delete'])->name('team_delete');
+
+	Route::get('/beranda', [AdminController::class, 'beranda'])->name('beranda');
+	Route::post('/beranda_add', [AdminController::class, 'beranda_add'])->name('beranda_add');
+	Route::post('/beranda_update/{id}', [AdminController::class, 'beranda_update'])->name('beranda_update');
+	Route::post('/beranda_delete/{id}', [AdminController::class, 'beranda_delete'])->name('beranda_delete');
+
+	Route::get('/about', [AdminController::class, 'about'])->name('about');
+	Route::post('/about_add', [AdminController::class, 'about_add'])->name('about_add');
+	Route::post('/about_update/{id}', [AdminController::class, 'about_update'])->name('about_update');
+	Route::post('/about_delete/{id}', [AdminController::class, 'about_delete'])->name('about_delete');
+
 	// Route::post('/detail_jasa_add', [AdminController::class, 'detail_jasa_add'])->name('detail_jasa_add');
 
 

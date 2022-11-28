@@ -11,13 +11,13 @@ BAK INDONESIA ADMIN
  <div class="col-lg-12">
   <div class="card">
     <div class="card-header">
-      <h4 style="color: #1C75BC">Informasi Perusahaan / Carousel</h4><br>
+      <h4 style="color: #1C75BC">Team</h4><br>
     </div>
 
 
     <div class="card-body">
-     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalTambahKontak">
-      Tambah Image
+     <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#ModalTambahTeam">
+      Tambah Team
     </button><br><hr>
 
     @if (session('success'))
@@ -30,21 +30,33 @@ BAK INDONESIA ADMIN
         <thead>
           <tr>
             <th>No</th>
-            <th>Indeks</th>
-            <th>Image</th>
+            <th>Nama</th>
+            <th>Jabatan</th>
+            <th>Deskripsi</th>
+            <th>Instagram</th>
+            <th>Facebook</th>
+            <th>Twitter</th>
+            <th>Linked In</th>
+            <th>Foto</th>
             <th>Opsi</th>
             <th style="display: none;">hidden</th>
           </tr>
         </thead>
         <tbody>
           @php $no=1 @endphp
-          @foreach($carousel as $data)
+          @foreach($team as $data)
           <tr>
             <td>{{$no++}}</td>
-            <td>{{$data->indeks}}</td>
-            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/carousel/'.$data->image)}}"  data-toggle="modal" data-target="#myModal"></img></td>
+            <td>{{$data->nama}}</td>
+            <td>{{$data->jabatan}}</td>
+            <td>{{$data->deskripsi}}</td>
+            <td>{{$data->instagram}}</td>
+            <td>{{$data->facebook}}</td>
+            <td>{{$data->twitter}}</td>
+            <td>{{$data->linkedin}}</td>
+            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/team/'.$data->image)}}"  data-toggle="modal" data-target="#myModal"></img></td>
             <td>
-               <button class="btn btn-success btn-sm editCarousel">Edit</button>
+               <button class="btn btn-success btn-sm editTeam">Edit</button>
 
                <a href="#" data-toggle="modal" onclick="deleteData({{$data->id}})" data-target="#DeleteModal">
               <button class="btn btn-danger btn-sm"  title="Hapus">Hapus</button>
@@ -67,19 +79,56 @@ BAK INDONESIA ADMIN
 
 
 <!-- Modal Tambah -->
-<div class="modal fade" id="ModalTambahKontak" tabindex="-1" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalTambahTeam" tabindex="-1" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myLargeModalLabel">Tambah Data Carousel</h5>
+        <h5 class="modal-title" id="myLargeModalLabel">Tambah Data Team</h5>
       </div>
       <div class="modal-body">
-       <form method="post" action="{{route('carousel_add')}}" enctype="multipart/form-data">
+       <form method="post" action="{{route('team_add')}}" enctype="multipart/form-data">
 
         {{csrf_field()}}
 
+        
         <div class="form-group">
-          <label for="image">Image</label>
+          <label for="nama">Nama</label>
+          <input type="text" class="form-control" id="nama" name="nama"  required=""></input>
+        </div>
+
+        <div class="form-group">
+          <label for="jabatan">Jabatan</label>
+          <input type="text" class="form-control" id="jabatan" name="jabatan"  required=""></input>
+        </div>
+
+        <div class="form-group">
+          <label for="deskripsi">Deskripsi</label>
+          <textarea type="text" class="form-control" id="deskripsi" name="deskripsi"  required=""></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="instagram">Link Instagram (Opsional)</label>
+          <input type="text" class="form-control" id="instagram" name="instagram" ></input>
+        </div>
+ 
+        <div class="form-group">
+          <label for="facebook">Link Facebook (Opsional)</label>
+          <input type="text" class="form-control" id="facebook" name="facebook" ></input>
+        </div>
+
+        <div class="form-group">
+          <label for="twitter">Link Twitter (Opsional)</label>
+          <input type="text" class="form-control" id="twitter" name="twitter" ></input>
+        </div>
+
+        <div class="form-group">
+          <label for="linkedin">Link LinkedIn (Opsional)</label>
+          <input type="text" class="form-control" id="linkedin" name="linkedin" ></input>
+        </div>
+
+
+        <div class="form-group">
+          <label for="image">Foto</label>
           <input type="file" class="form-control" id="image" name="image"  required=""></input>
         </div>
 
@@ -103,13 +152,13 @@ BAK INDONESIA ADMIN
 
 
 <!-- Modal Update -->
-<div id="updateCarousel" class="modal fade" role="dialog">
+<div id="updateTeam" class="modal fade" role="dialog">
   <div class="modal-dialog">
    <!--Modal content-->
-   <form action="" id="updateCarouselform" method="post" enctype="multipart/form-data">
+   <form action="" id="updateTeamform" method="post" enctype="multipart/form-data">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Anda yakin ingin memperbarui Data Carousel ini ?</h5>
+        <h5 class="modal-title">Anda yakin ingin memperbarui Team ini ?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -118,8 +167,46 @@ BAK INDONESIA ADMIN
         {{ csrf_field() }}
         {{ method_field('POST') }}
 
-       <div class="form-group">
-          <label for="image">Image</label>
+       
+
+        <div class="form-group">
+          <label for="nama">Nama</label>
+          <input type="text" class="form-control" id="nama_update" name="nama"  required=""></input>
+        </div>
+
+        <div class="form-group">
+          <label for="jabatan">Jabatan</label>
+          <input type="text" class="form-control" id="jabatan_update" name="jabatan"  required=""></input>
+        </div>
+
+        <div class="form-group">
+          <label for="deskripsi">Deskripsi</label>
+          <textarea type="text" class="form-control" id="deskripsi_update" name="deskripsi"  required=""></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="instagram">Instagram (Opsional)</label>
+          <input type="text" class="form-control" id="instagram_update" name="instagram" ></input>
+        </div>
+
+        <div class="form-group">
+          <label for="facebook">Facebook (Opsional)</label>
+          <input type="text" class="form-control" id="facebook_update" name="facebook" ></input>
+        </div>
+
+        <div class="form-group">
+          <label for="twitter">Twitter (Opsional)</label>
+          <input type="text" class="form-control" id="twitter_update" name="twitter" ></input>
+        </div>
+
+        <div class="form-group">
+          <label for="linkedin">LinkedIn (Opsional)</label>
+          <input type="text" class="form-control" id="linkedin_update" name="linkedin" ></input>
+        </div>
+
+
+        <div class="form-group">
+          <label for="image">Foto</label>
           <input type="file" class="form-control" id="image_update" name="image"  required=""></input>
         </div>
 
@@ -189,7 +276,7 @@ BAK INDONESIA ADMIN
 <script type="text/javascript">
   function deleteData(id) {
     var id = id;
-    var url = '{{route("carousel_delete", ":id") }}';
+    var url = '{{route("team_delete", ":id") }}';
     url = url.replace(':id', id);
     $("#deleteForm").attr('action', url);
   }
@@ -202,15 +289,22 @@ BAK INDONESIA ADMIN
 <script>
   $(document).ready(function() {
     var table = $('#dataTable').DataTable();
-    table.on('click', '.editCarousel', function() {
+    table.on('click', '.editTeam', function() {
       $tr = $(this).closest('tr');
       if ($($tr).hasClass('child')) {
         $tr = $tr.prev('.parent');
       }
       var data = table.row($tr).data();
       console.log(data);
-      $('#updateCarouselform').attr('action','carousel_update/'+ data[4]);
-      $('#updateCarousel').modal('show');
+      $('#nama_update').val(data[1]);
+      $('#jabatan_update').val(data[2]);
+      $('#deskripsi_update').val(data[3]);
+      $('#instagram_update').val(data[4]);
+      $('#facebook_update').val(data[5]);
+      $('#twitter_update').val(data[6]);
+      $('#linkedin_update').val(data[7]);
+      $('#updateTeamform').attr('action','team_update/'+ data[10]);
+      $('#updateTeam').modal('show');
     });
   });
 </script>

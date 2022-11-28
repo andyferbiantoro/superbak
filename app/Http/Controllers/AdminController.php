@@ -8,7 +8,13 @@ use App\Models\Jasa;
 use App\Models\VisiMisi;
 use App\Models\Kontak;
 use App\Models\Carousel;
+use App\Models\Kerjasama;
+use App\Models\Portofolio;
+use App\Models\Team;
+use App\Models\Beranda;
+use App\Models\About;
 use File;
+use DB;
 
 
 
@@ -41,7 +47,7 @@ class AdminController extends Controller
 		if($request->hasFile('foto_jasa_1')){
 			$file = $request->file('foto_jasa_1');
 			$filename = $file->getClientOriginalName();
-			$file->move('uploads/foto_jasa_1/', $filename);
+			$file->move('public/uploads/foto_jasa_1/', $filename);
 			$data_add->foto_jasa_1 = $filename;
 
 
@@ -52,7 +58,7 @@ class AdminController extends Controller
 		if($request->hasFile('foto_jasa_2')){
 			$file = $request->file('foto_jasa_2');
 			$filename = $file->getClientOriginalName();
-			$file->move('uploads/foto_jasa_2/', $filename);
+			$file->move('public/uploads/foto_jasa_2/', $filename);
 			$data_add->foto_jasa_2 = $filename;
 
 
@@ -63,7 +69,7 @@ class AdminController extends Controller
 		if($request->hasFile('foto_jasa_3')){
 			$file = $request->file('foto_jasa_3');
 			$filename = $file->getClientOriginalName();
-			$file->move('uploads/foto_jasa_3/', $filename);
+			$file->move('public/uploads/foto_jasa_3/', $filename);
 			$data_add->foto_jasa_3 = $filename;
 
 
@@ -74,7 +80,7 @@ class AdminController extends Controller
 		if($request->hasFile('foto_jasa_4')){
 			$file = $request->file('foto_jasa_4');
 			$filename = $file->getClientOriginalName();
-			$file->move('uploads/foto_jasa_4/', $filename);
+			$file->move('public/uploads/foto_jasa_4/', $filename);
 			$data_add->foto_jasa_4 = $filename;
 
 
@@ -85,7 +91,7 @@ class AdminController extends Controller
 		if($request->hasFile('foto_jasa_5')){
 			$file = $request->file('foto_jasa_5');
 			$filename = $file->getClientOriginalName();
-			$file->move('uploads/foto_jasa_5/', $filename);
+			$file->move('public/uploads/foto_jasa_5/', $filename);
 			$data_add->foto_jasa_5 = $filename;
 
 
@@ -126,8 +132,18 @@ class AdminController extends Controller
 
 		];
 
-
 		$data_update->update($input);
+
+		$update_slug = Portofolio::where('id_jasa', $id)->get();
+
+		foreach ($update_slug as $key => $value) {
+			$input_slug = [
+				'slug' => $request->nama_jasa,
+			];
+
+			$value->update($input_slug);
+		}
+
 
 		return redirect()->back()->with('success', 'Data Berhasil Diupdate');
 	}
@@ -141,7 +157,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_1')) {
 			if ($data_update->foto_jasa_1) {
-				File::delete('uploads/foto_jasa_1/' . $data_update->foto_jasa_1);
+				File::delete('public/uploads/foto_jasa_1/' . $data_update->foto_jasa_1);
 			}
 			$nama_file = $file->getClientOriginalName();
 			$file->move(public_path() . '/uploads/foto_jasa_1/', $nama_file);
@@ -150,7 +166,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_2')) {
 			if ($data_update->foto_jasa_2) {
-				File::delete('uploads/foto_jasa_2/' . $data_update->foto_jasa_2);
+				File::delete('public/uploads/foto_jasa_2/' . $data_update->foto_jasa_2);
 			}
 			$nama_file = $file->getClientOriginalName();
 			$file->move(public_path() . '/uploads/foto_jasa_2/', $nama_file);
@@ -159,7 +175,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_3')) {
 			if ($data_update->foto_jasa_3) {
-				File::delete('uploads/foto_jasa_3/' . $data_update->foto_jasa_3);
+				File::delete('public/uploads/foto_jasa_3/' . $data_update->foto_jasa_3);
 			}
 			$nama_file = $file->getClientOriginalName();
 			$file->move(public_path() . '/uploads/foto_jasa_3/', $nama_file);
@@ -168,7 +184,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_4')) {
 			if ($data_update->foto_jasa_4) {
-				File::delete('uploads/foto_jasa_4/' . $data_update->foto_jasa_4);
+				File::delete('public/uploads/foto_jasa_4/' . $data_update->foto_jasa_4);
 			}
 			$nama_file = $file->getClientOriginalName();
 			$file->move(public_path() . '/uploads/foto_jasa_4/', $nama_file);
@@ -177,7 +193,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_5')) {
 			if ($data_update->foto_jasa_5) {
-				File::delete('uploads/foto_jasa_5/' . $data_update->foto_jasa_5);
+				File::delete('public/uploads/foto_jasa_5/' . $data_update->foto_jasa_5);
 			}
 			$nama_file = $file->getClientOriginalName();
 			$file->move(public_path() . '/uploads/foto_jasa_5/', $nama_file);
@@ -199,7 +215,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_1')) {
 			if ($data_update->foto_jasa_1) {
-				File::delete('uploads/foto_jasa_1/' . $data_update->foto_jasa_5);
+				File::delete('public/uploads/foto_jasa_1/' . $data_update->foto_jasa_5);
 			}
 		}
 		$input = [
@@ -219,7 +235,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_2')) {
 			if ($data_update->foto_jasa_2) {
-				File::delete('uploads/foto_jasa_2/' . $data_update->foto_jasa_5);
+				File::delete('public/uploads/foto_jasa_2/' . $data_update->foto_jasa_5);
 			}
 		}
 		$input = [
@@ -240,7 +256,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_3')) {
 			if ($data_update->foto_jasa_3) {
-				File::delete('uploads/foto_jasa_3/' . $data_update->foto_jasa_5);
+				File::delete('public/uploads/foto_jasa_3/' . $data_update->foto_jasa_5);
 			}
 		}
 		$input = [
@@ -261,7 +277,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_4')) {
 			if ($data_update->foto_jasa_4) {
-				File::delete('uploads/foto_jasa_4/' . $data_update->foto_jasa_5);
+				File::delete('public/uploads/foto_jasa_4/' . $data_update->foto_jasa_5);
 			}
 		}
 		$input = [
@@ -282,7 +298,7 @@ class AdminController extends Controller
 
 		if ($file = $request->file('foto_jasa_5')) {
 			if ($data_update->foto_jasa_5) {
-				File::delete('uploads/foto_jasa_5/' . $data_update->foto_jasa_5);
+				File::delete('public/uploads/foto_jasa_5/' . $data_update->foto_jasa_5);
 			}
 		}
 		$input = [
@@ -302,14 +318,21 @@ class AdminController extends Controller
 	{
 		$jasa = Jasa::findOrFail($id);
 
+		$portofolio = Portofolio::where('id_jasa', $jasa->id)->get();
+
+		foreach ($portofolio as $key => $value) {
+			File::delete('public/uploads/portofolio_image/'.$value->portofolio_image);
+			
+			$value->delete();
+		}
 		
 
 		$delete_jasa = Jasa::findOrFail($id);
-		File::delete('uploads/foto_jasa_1/'.$delete_jasa->foto_jasa_1);
-		File::delete('uploads/foto_jasa_2/'.$delete_jasa->foto_jasa_2);
-		File::delete('uploads/foto_jasa_3/'.$delete_jasa->foto_jasa_3);
-		File::delete('uploads/foto_jasa_4/'.$delete_jasa->foto_jasa_4);
-		File::delete('uploads/foto_jasa_5/'.$delete_jasa->foto_jasa_5);
+		File::delete('public/uploads/foto_jasa_1/'.$delete_jasa->foto_jasa_1);
+		File::delete('public/uploads/foto_jasa_2/'.$delete_jasa->foto_jasa_2);
+		File::delete('public/uploads/foto_jasa_3/'.$delete_jasa->foto_jasa_3);
+		File::delete('public/uploads/foto_jasa_4/'.$delete_jasa->foto_jasa_4);
+		File::delete('public/uploads/foto_jasa_5/'.$delete_jasa->foto_jasa_5);
 		
 		$delete_jasa->delete();
 
@@ -317,7 +340,117 @@ class AdminController extends Controller
 	}
 	
 // ==========================================================================================================================
+public function beranda(){
 
+		$beranda = Beranda::all();
+		$count = Beranda::count();
+		// $count_beranda = VisiMisi::count();
+
+		return view('admin.tentang_perusahaan.beranda',compact('beranda','count'));
+	}
+
+
+	public function beranda_add(Request $request){
+
+
+		$data_add = new Beranda();
+
+		$data_add->header = $request->input('header');
+		$data_add->deskripsi = $request->input('deskripsi');
+		
+		$data_add->save();
+
+		return redirect()->back()->with('success', 'Beranda Berhasil Ditambahkan');
+	}
+
+
+	public function beranda_update(Request $request, $id)
+	{
+
+		$data_update = Beranda::where('id', $id)->first();
+
+		$input = [
+			'header' => $request->header,
+			'deskripsi' => $request->deskripsi,
+			
+		];
+
+		$data_update->update($input);
+
+		return redirect()->back()->with('success', 'Beranda Berhasil Diupdate');
+	}
+
+
+	public function beranda_delete($id)
+	{
+		$delete = Beranda::findOrFail($id);
+		$delete->delete();
+
+		return redirect()->back()->with('success', 'Beranda Berhasil Dihapus');
+	}
+// ==============================================================================================================
+
+
+	public function about(){
+
+		$about = About::all();
+		$count = About::count();
+		// $count_about = VisiMisi::count();
+
+		return view('admin.tentang_perusahaan.about',compact('about','count'));
+	}
+
+
+	public function about_add(Request $request){
+
+
+		$data_add = new About();
+
+		$data_add->header = $request->input('header');
+		$data_add->deskripsi = $request->input('deskripsi');
+		$data_add->instagram = $request->input('instagram');
+		$data_add->facebook = $request->input('facebook');
+		$data_add->twitter = $request->input('twitter');
+		$data_add->linkedin = $request->input('linkedin');
+
+		
+		$data_add->save();
+
+		return redirect()->back()->with('success', 'Data Berhasil Ditambahkan');
+	}
+
+
+	public function about_update(Request $request, $id)
+	{
+
+		$data_update = About::where('id', $id)->first();
+
+		$input = [
+			'header' => $request->header,
+			'deskripsi' => $request->deskripsi,
+			'instagram' => $request->instagram,
+			'facebook' => $request->facebook,
+			'twitter' => $request->twitter,
+			'linkedin' => $request->linkedin,
+			
+		];
+
+		$data_update->update($input);
+
+		return redirect()->back()->with('success', 'Data Berhasil Diupdate');
+	}
+
+
+	public function about_delete($id)
+	{
+		$delete = About::findOrFail($id);
+		$delete->delete();
+
+		return redirect()->back()->with('success', 'Data Berhasil Dihapus');
+	}
+
+
+// =============================================================================================================
 	
 	public function visi_misi(){
 
@@ -425,7 +558,7 @@ class AdminController extends Controller
 // ==========================================================================================================
 
 
-public function carousel(){
+	public function carousel(){
 
 		$carousel = Carousel::orderby('id','DESC')->get();
 		// $count_carousel = VisiMisi::count();
@@ -436,7 +569,7 @@ public function carousel(){
 
 	public function carousel_add(Request $request){
 
-	    $get_count = Carousel::count();
+		$get_count = Carousel::count();
 
 		$data_add = new Carousel();
 
@@ -445,7 +578,7 @@ public function carousel(){
 		if($request->hasFile('image')){
 			$file = $request->file('image');
 			$filename = $file->getClientOriginalName();
-			$file->move('uploads/carousel/', $filename);
+			$file->move('public/uploads/carousel/', $filename);
 			$data_add->image = $filename;
 
 
@@ -466,7 +599,7 @@ public function carousel(){
 
 		if ($file = $request->file('image')) {
 			if ($data_update->image) {
-				File::delete('uploads/carousel/' . $data_update->image);
+				File::delete('public/uploads/carousel/' . $data_update->image);
 			}
 			$nama_file = $file->getClientOriginalName();
 			$file->move(public_path() . '/uploads/carousel/', $nama_file);
@@ -482,9 +615,247 @@ public function carousel(){
 	public function carousel_delete($id)
 	{
 		$delete = Carousel::findOrFail($id);
+		File::delete('public/uploads/carousel/' . $delete->image);
 		$delete->delete();
 
 		return redirect()->back()->with('success', 'carousel Berhasil Dihapus');
+	}
+
+// ==========================================================================================================================
+
+
+public function kerjasama(){
+
+		$kerjasama = Kerjasama::orderby('id','DESC')->get();
+		$count = Beranda::count();
+		// $count_kerjasama = VisiMisi::count();
+
+		return view('admin.tentang_perusahaan.kerjasama',compact('kerjasama','count'));
+	}
+
+
+	public function kerjasama_add(Request $request){
+
+
+		$data_add = new kerjasama();
+
+		$data_add->jumlah_kerjasama = $request->input('jumlah_kerjasama');
+		$data_add->penilaian = $request->input('penilaian');
+		$data_add->jumlah_mitra = $request->input('jumlah_mitra');
+		
+		$data_add->save();
+
+		return redirect()->back()->with('success', 'kerjasama Berhasil Ditambahkan');
+	}
+
+
+	public function kerjasama_update(Request $request, $id)
+	{
+
+		$data_update = kerjasama::where('id', $id)->first();
+
+		$input = [
+			'jumlah_kerjasama' => $request->jumlah_kerjasama,
+			'penilaian' => $request->penilaian,
+			'jumlah_mitra' => $request->jumlah_mitra,
+		];
+
+		$data_update->update($input);
+
+		return redirect()->back()->with('success', 'kerjasama Berhasil Diupdate');
+	}
+
+
+	public function kerjasama_delete($id)
+	{
+		$delete = Kerjasama::findOrFail($id);
+		$delete->delete();
+
+		return redirect()->back()->with('success', 'kerjasama Berhasil Dihapus');
+	}
+
+
+//====================================================================================================================
+
+public function portofolio(){
+
+		// $portofolio = Portofolio::orderby('id','DESC')->get();
+
+		$portofolio = DB::table('portofolios')
+		->join('jasas' , 'portofolios.id_jasa', '=' , 'jasas.id')
+		->select('portofolios.*','jasas.nama_jasa')
+		->orderBy('portofolios.id','DESC')
+		->get();
+
+		$list_jasa = Jasa::orderby('id', 'DESC')->get();
+		
+		// return $portofolio;
+
+		return view('admin.tentang_perusahaan.portofolio',compact('portofolio','list_jasa'));
+	}
+
+
+	public function portofolio_add(Request $request){
+
+		$get_count = portofolio::where('id_jasa', $request->id_jasa)->count();
+
+		$data = ([
+			'id_jasa' => $request['id_jasa'],
+			'indeks' => $get_count+1,
+
+		]);
+
+		
+
+		if($request->hasFile('portofolio_image')){
+			$file = $request->file('portofolio_image');
+			$filename = $file->getClientOriginalName();
+			$file->move('public/uploads/portofolio_image/', $filename);
+			$data['portofolio_image'] = $filename;
+
+
+		}else{
+			echo "Gagal upload gambar";
+		}
+
+
+		$lastid = Portofolio::create($data)->id_jasa;
+
+		$jasa = Jasa::where('id', $lastid)->first();
+		$get_slug = $jasa->nama_jasa;
+
+		$data_update = Portofolio::where('id_jasa', $lastid)->orderBy('id','DESC')->first();
+		$update_slug = [
+			'slug' => $get_slug,
+		];
+
+		$data_update->update($update_slug);
+
+
+		return redirect()->back()->with('success', 'portofolio Berhasil Ditambahkan');
+	}
+
+
+	public function portofolio_update(Request $request, $id)
+	{
+
+		$data_update = Portofolio::where('id', $id)->first();
+
+		$input = [
+			'id_jasa' => $request->id_jasa,
+		];
+
+		if ($file = $request->file('portofolio_image')) {
+			if ($data_update->portofolio_image) {
+				File::delete('public/uploads/portofolio_image/' . $data_update->portofolio_image);
+			}
+			$nama_file = $file->getClientOriginalName();
+			$file->move(public_path() . '/uploads/portofolio_image/', $nama_file);
+			$input['portofolio_image'] = $nama_file;
+		}
+
+		$data_update->update($input);
+
+		return redirect()->back()->with('success', 'portofolio Berhasil Diupdate');
+	}
+
+
+	public function portofolio_delete($id)
+	{
+		$delete = Portofolio::findOrFail($id);
+		File::delete('public/uploads/portofolio_image/' . $delete->portofolio_image);
+		$delete->delete();
+
+		return redirect()->back()->with('success', 'portofolio Berhasil Dihapus');
+	}
+
+	//==============================================================================================================
+
+
+	public function team(){
+
+		$team = Team::orderby('id','DESC')->get();
+
+		// $team = DB::table('teams')
+		// ->join('jasas' , 'teams.id_jasa', '=' , 'jasas.id')
+		// ->select('teams.*','jasas.nama_jasa')
+		// ->orderBy('teams.id','DESC')
+		// ->get();
+
+		// $list_jasa = Jasa::orderby('id', 'DESC')->get();
+		// $count_team = VisiMisi::count();
+
+		return view('admin.team.index',compact('team'));
+	}
+
+
+	public function team_add(Request $request){
+
+
+		$data_add = new Team();
+
+		$data_add->nama = $request->input('nama');
+		$data_add->jabatan = $request->input('jabatan');
+		$data_add->deskripsi = $request->input('deskripsi');
+		$data_add->instagram = $request->input('instagram');
+		$data_add->facebook = $request->input('facebook');
+		$data_add->linkedin = $request->input('linkedin');
+		$data_add->twitter = $request->input('twitter');
+		
+		if($request->hasFile('image')){
+			$file = $request->file('image');
+			$filename = $file->getClientOriginalName();
+			$file->move('public/uploads/team/', $filename);
+			$data_add->image = $filename;
+
+
+		}else{
+			echo "Gagal upload gambar";
+		}
+
+		$data_add->save();
+
+		return redirect()->back()->with('success', 'Team Berhasil Ditambahkan');
+	}
+
+
+	public function team_update(Request $request, $id)
+	{
+
+		$data_update = team::where('id', $id)->first();
+
+		$input = [
+			'nama' => $request->nama,
+			'jabatan' => $request->jabatan,
+			'deskripsi' => $request->deskripsi,
+			'instagram' => $request->instagram,
+			'facebook' => $request->facebook,
+			'twitter' => $request->twitter,
+			'linkedin' => $request->linkedin,
+		];
+
+		if ($file = $request->file('image')) {
+			if ($data_update->image) {
+				File::delete('public/uploads/team/' . $data_update->image);
+			}
+			$nama_file = $file->getClientOriginalName();
+			$file->move(public_path() .'/uploads/team/', $nama_file);
+			$input['image'] = $nama_file;
+		}
+
+		$data_update->update($input);
+
+		return redirect()->back()->with('success', 'team Berhasil Diupdate');
+	}
+
+
+	public function team_delete($id)
+	{
+		$delete = team::findOrFail($id);
+		File::delete('public/uploads/team/' . $delete->image);
+		$delete->delete();
+
+		return redirect()->back()->with('success', 'team Berhasil Dihapus');
 	}
 
 

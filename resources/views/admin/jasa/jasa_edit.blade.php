@@ -69,7 +69,7 @@ BAK INDONESIA ADMIN
      <div class="row">
 
       <div class="col-lg-6 text-center">
-        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('uploads/foto_jasa_1/'.$foto->foto_jasa_1)}}">
+        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('public/uploads/foto_jasa_1/'.$foto->foto_jasa_1)}}">
         <p>Foto 1</p><br>
         <form method="post" action="{{route('foto_jasa_update', $foto->id)}}" enctype="multipart/form-data">
           {{csrf_field()}}
@@ -88,7 +88,7 @@ BAK INDONESIA ADMIN
       </div>
 
       <div class="col-lg-6 text-center">
-        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('uploads/foto_jasa_2/'.$foto->foto_jasa_2)}}">
+        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('public/uploads/foto_jasa_2/'.$foto->foto_jasa_2)}}">
         <p>Foto 2</p><br>
         <form method="post" action="{{route('foto_jasa_update', $foto->id)}}" enctype="multipart/form-data">
           {{csrf_field()}}
@@ -110,7 +110,7 @@ BAK INDONESIA ADMIN
 
     <div class="row">
       <div class="col-lg-6 text-center">
-        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('uploads/foto_jasa_3/'.$foto->foto_jasa_3)}}">
+        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('public/uploads/foto_jasa_3/'.$foto->foto_jasa_3)}}">
         <p>Foto 3</p>
         <br>
         <form method="post" action="{{route('foto_jasa_update', $foto->id)}}" enctype="multipart/form-data">
@@ -130,7 +130,7 @@ BAK INDONESIA ADMIN
       </div>
 
       <div class="col-lg-6 text-center">
-        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('uploads/foto_jasa_4/'.$foto->foto_jasa_4)}}">
+        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('public/uploads/foto_jasa_4/'.$foto->foto_jasa_4)}}">
         <p>Foto 4</p>
         <br>
         <form method="post" action="{{route('foto_jasa_update', $foto->id)}}" enctype="multipart/form-data">
@@ -155,7 +155,7 @@ BAK INDONESIA ADMIN
     <div class="row">
 
       <div class="col-lg-6 text-center">
-        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('uploads/foto_jasa_5/'.$foto->foto_jasa_5)}}">
+        <img style="border-radius: 0%; height: 350px; width: auto;"  src="{{asset('public/uploads/foto_jasa_5/'.$foto->foto_jasa_5)}}">
         <p>Foto 5</p>
         <br>
         <form method="post" action="{{route('foto_jasa_update', $foto->id)}}" enctype="multipart/form-data">

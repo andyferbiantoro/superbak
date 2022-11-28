@@ -48,15 +48,15 @@ BAK INDONESIA ADMIN
             <td>{{$no++}}</td>
             <td>{{$data->nama_jasa}}</td>
             <td>{{$data->deskripsi}}</td>
-            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('uploads/foto_jasa_1/'.$data->foto_jasa_1)}}"  data-toggle="modal" data-target="#myModal"></img></td>
+            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/foto_jasa_1/'.$data->foto_jasa_1)}}"  data-toggle="modal" data-target="#myModal"></img></td>
 
-            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('uploads/foto_jasa_2/'.$data->foto_jasa_2)}}"  data-toggle="modal" data-target="#myModal"></img></td>
+            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/foto_jasa_2/'.$data->foto_jasa_2)}}"  data-toggle="modal" data-target="#myModal"></img></td>
 
-            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('uploads/foto_jasa_3/'.$data->foto_jasa_3)}}"  data-toggle="modal" data-target="#myModal"></img></td>
+            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/foto_jasa_3/'.$data->foto_jasa_3)}}"  data-toggle="modal" data-target="#myModal"></img></td>
 
-            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('uploads/foto_jasa_4/'.$data->foto_jasa_4)}}"  data-toggle="modal" data-target="#myModal"></img></td>
+            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/foto_jasa_4/'.$data->foto_jasa_4)}}"  data-toggle="modal" data-target="#myModal"></img></td>
 
-            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('uploads/foto_jasa_5/'.$data->foto_jasa_5)}}"  data-toggle="modal" data-target="#myModal"></img></td>  
+            <td><img style="border-radius: 0%" height="70" id="ImageTampil" src="{{asset('public/uploads/foto_jasa_5/'.$data->foto_jasa_5)}}"  data-toggle="modal" data-target="#myModal"></img></td>  
             <td>
 
                <a href="{{ route('jasa_edit',$data->id) }}"><button class="btn btn-warning btn-sm ">Edit</button></a><br><br>
